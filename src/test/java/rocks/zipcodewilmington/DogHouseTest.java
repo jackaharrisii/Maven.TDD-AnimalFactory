@@ -1,8 +1,11 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Cat;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
+import rocks.zipcodewilmington.animals.animal_storage.CatHouse;
 import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
 
 import java.util.Date;
@@ -18,17 +21,35 @@ public class DogHouseTest {
     // TODO - Create tests for `Integer getNumberOfDogs()`
 
     @Test
-    public void testGetNumberOfDogs() {
-        // Given (some
-        String name = "Milo";
-        Date birthDate = new Date();
-        Dog animal = AnimalFactory.createDog(name, birthDate);
-        DogHouse.clear();
+    public void addDogTest(){
+        Dog dogmeat = new Dog("Dogmeat", new Date(2014,11,10), 001);
+        DogHouse.add(dogmeat);
+        Assert.assertEquals(dogmeat, DogHouse.getDogById(001));
+    }
 
-        // When
-        DogHouse.add(animal);
+    @Test
+    public void removeDogTest(){
+        Dog dogmeat = new Dog("Dogmeat", new Date(2014,11,10), 002);
+        DogHouse.add(dogmeat);
+        DogHouse.remove(dogmeat);
+        Assert.assertEquals(null, DogHouse.getDogById(001));
+    }
 
-        // Then
-        DogHouse.getNumberOfDogs();
+    @Test
+    public void removeDogIdTest(){
+        Dog dogmeat = new Dog("Dogmeat", new Date(2014,11,10), 003);
+        DogHouse.add(dogmeat);
+        DogHouse.remove(001);
+        Assert.assertEquals(null, DogHouse.getDogById(001));
+    }
+
+    //don't need to write a test for getCatById, because if it didn't work none of the above tests would work either
+
+    @Test
+    public void getNumberOfDogsTest(){
+        Dog dogmeat = new Dog("Dogmeat", new Date(2014,11,10), 004);
+        int original = DogHouse.getNumberOfDogs();
+        DogHouse.add(dogmeat);
+        Assert.assertEquals(Integer.valueOf(original + 1), DogHouse.getNumberOfDogs());
     }
 }

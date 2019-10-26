@@ -2,7 +2,9 @@ package rocks.zipcodewilmington;
 
 import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Cat;
+import rocks.zipcodewilmington.animals.Mammal;
 
 import java.util.Date;
 
@@ -40,4 +42,52 @@ public class CatTest {
         Assert.assertEquals(givenId, retrievedId);
     }
 
+    @Test
+    public void setNameTest(){
+        Date date = new Date();
+        Cat sadie = new Cat("Sadie", date, 003);
+        sadie.setName("Sadie, Danger Floof");
+        Assert.assertEquals("Sadie, Danger Floof",sadie.getName());
+    }
+
+    @Test
+    public void speakTest(){
+        Date date = new Date();
+        Cat sadie = new Cat("Sadie, Danger Floof", new Date(2015,03,30), 003);
+        Assert.assertEquals("meow!",sadie.speak());
+    }
+
+    @Test
+    public void setBirthDateTest(){
+        Cat sadie = new Cat("Sadie, Danger Floof",new Date(2015,03,30) , 003);
+        Date newBD = new Date (2014, 03, 30);
+        sadie.setBirthDate(newBD);
+        Assert.assertEquals(newBD, sadie.getBirthDate());
+    }
+
+    @Test
+    public void eatTest(){
+        Cat sadie = new Cat("Sadie, Danger Floof",new Date(2015,03,30) , 003);
+        Food cheese = new Food();
+        sadie.eat(cheese);
+        Assert.assertEquals(Integer.valueOf(1), sadie.getNumberOfMealsEaten());
+    }
+
+    @Test
+    public void getIdTest(){
+        Cat sadie = new Cat("Sadie, Danger Floof",new Date(2015,03,30) , 003);
+        Assert.assertEquals(Integer.valueOf(003), sadie.getId());
+    }
+
+    @Test
+    public void catIsAnimalTest(){
+        Cat sadie = new Cat("Sadie, Danger Floof",new Date(2015,03,30) , 003);
+        Assert.assertEquals(true, sadie instanceof Animal);
+    }
+
+    @Test
+    public void catIsMammalTest(){
+        Cat sadie = new Cat("Sadie, Danger Floof",new Date(2015,03,30) , 003);
+        Assert.assertEquals(true, sadie instanceof Mammal);
+    }
 }

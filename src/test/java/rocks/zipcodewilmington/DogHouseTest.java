@@ -44,6 +44,14 @@ public class DogHouseTest {
     }
 
     //don't need to write a test for getCatById, because if it didn't work none of the above tests would work either
+    //overruled by Chris - we have to get practice writing redundant pointless tests because future managers may require us to write redundant pointless tests....    :)
+
+    @Test
+    public void getDogByIdTest(){
+        Dog dogmeat5 = new Dog("Dogmeat", new Date(2014,11,10), 005);
+        DogHouse.add(dogmeat5);
+        Assert.assertEquals(dogmeat5, DogHouse.getDogById(005));
+    }
 
     @Test
     public void getNumberOfDogsTest(){
